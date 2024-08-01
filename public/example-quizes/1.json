@@ -1,0 +1,45 @@
+{
+  "questions": [
+    {
+      "type": "single-choice",
+      "question": "What is the capital of France?",
+      "options": ["New York", "London", "Paris", "Dublin"],
+      "correctIndex": 2
+    },
+    {
+      "type": "single-choice",
+      "title": "Europe's capitals",
+      "question": "What is the capital of France?",
+      "options": ["New York", "London", "Paris", "Dublin"],
+      "correctIndex": 2
+    },
+    {
+      "type": "single-choice",
+      "title": "Europe's capitals",
+      "description": "France is the home of the Eiffel Tower and great wine.",
+      "question": "What is the capital of France?",
+      "options": ["New York", "London", "Paris", "Dublin"],
+      "correctIndex": 2
+    },
+    {
+      "type": "single-choice",
+      "title": "Europe's capitals",
+      "description": "France is the home of the Eiffel Tower and great wine.",
+      "image": "https://assets.editorial.aetnd.com/uploads/2011/06/gettyimages-142198198.jpg?width=768",
+      "question": "What is the capital of France?",
+      "options": ["New York", "London", "Paris", "Dublin"],
+      "correctIndex": 2
+    },
+    {
+      "type": "multiple-choice",
+      "question": "Which of these cities are located in the United States of America?",
+      "options": ["New York", "London", "Los Angeles", "Dublin"],
+      "correctIndices": [0, 2]
+    },
+    {
+      "type": "input",
+      "question": "What is the capital of the United Kingdom?",
+      "correctAnswers": ["London"]
+    }
+  ]
+}
