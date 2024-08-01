@@ -1,7 +1,14 @@
+import { useState } from "react";
+import Loader from "./Loader";
+import { Question } from "./types";
+
 function App() {
+  const [questions, setQuesitons] = useState<Question[]>([]);
+
   return (
     <>
-      <h1 className="text-red-400">Vite + React</h1>
+      <Loader setQuestions={setQuesitons} />
+      <pre>{JSON.stringify(questions, null, 2)}</pre>
     </>
   );
 }
