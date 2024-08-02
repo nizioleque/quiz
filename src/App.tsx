@@ -3,12 +3,11 @@ import Loader from "./Loader";
 import { Question } from "./types";
 
 function App() {
-  const [questions, setQuesitons] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<Question[] | null>(null);
 
   return (
     <>
-      <Loader setQuestions={setQuesitons} />
-      <pre>{JSON.stringify(questions, null, 2)}</pre>
+      <Loader setQuestions={setQuestions} />
     </>
   );
 }

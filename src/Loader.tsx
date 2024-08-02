@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import { Question } from "./types";
 
 interface LoaderProps {
-  setQuestions: Dispatch<SetStateAction<Question[]>>;
+  setQuestions: Dispatch<SetStateAction<Question[] | null>>;
 }
 
 function Loader({ setQuestions }: LoaderProps) {
@@ -12,7 +12,8 @@ function Loader({ setQuestions }: LoaderProps) {
     try {
       const text = await file.text();
       const json = JSON.parse(text);
-      setQuestions(json);
+      if (!("questions" in json)) throw new Error("Invalid JSON");
+      setQuestions(json.questions);
     } catch {
       // TODO handle error
     }
