@@ -8,15 +8,27 @@ interface QuestionProps {
 }
 
 function Question({ question, onBack, onNext }: QuestionProps) {
+  const backButton = onBack ? (
+    <button type="button" onClick={onBack}>
+      Back
+    </button>
+  ) : null;
+
+  const nextButton = (
+    <button type="submit" onClick={onNext}>
+      Next
+    </button>
+  );
+
   return (
     <form
-      className="flex items-center"
+      className="flex items-center flex-col justify-center lg:flex-row gap-y-8 lg:w-full lg:p-8"
       onSubmit={(event) => {
         event.preventDefault();
         onNext();
       }}
     >
-      <div className="bg-stone-200/25 border-stone-300 border-2 rounded-md p-8 overflow-hidden max-w-[600px]">
+      <div className="bg-stone-200/25 border-stone-300 border-2 rounded-md p-8 overflow-hidden flex-1 max-w-[600px] lg:mx-8">
         {question.image && (
           <div className="-mt-8 -mx-8 mb-8">
             <img
@@ -48,15 +60,18 @@ function Question({ question, onBack, onNext }: QuestionProps) {
         </div>
       </div>
 
-      {onBack && (
-        <div className="order-first overflow-visible">
-          <button type="button" onClick={onBack}>
-            Back
-          </button>
-        </div>
-      )}
-      <div className="order-last overflow-visible">
-        <button type="submit">Next</button>
+      {/* back/forward buttons for desktop */}
+      <div className="order-first overflow-visible hidden lg:flex w-0 justify-end">
+        {backButton}
+      </div>
+      <div className="order-last overflow-visible hidden lg:block w-0">
+        {nextButton}
+      </div>
+
+      {/* back/forward buttons for mobile */}
+      <div className="flex justify-between self-stretch lg:hidden">
+        {backButton}
+        <div className="ms-auto">{nextButton}</div>
       </div>
     </form>
   );
