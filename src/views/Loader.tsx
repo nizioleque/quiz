@@ -30,11 +30,19 @@ function Loader({ setQuestions }: LoaderProps) {
   };
 
   return (
-    <input
-      type="file"
-      accept=".json"
-      onChange={(event) => loadFile(event.currentTarget.files?.[0])}
-    />
+    <div className="flex flex-col gap-3">
+      <h1 className="h1 mb-3">Questionnaire app</h1>
+      <p>Upload a quiz definition to get started</p>
+      <label>
+        <input
+          type="file"
+          accept=".json"
+          hidden
+          onChange={(event) => loadFile(event.currentTarget.files?.[0])}
+        />
+        <span className="button">Select file</span>
+      </label>
+    </div>
   );
 }
 
