@@ -1,3 +1,4 @@
+import Label from "../../components/Label";
 import { MultipleChoiceQuestion } from "../../types";
 
 interface MultipleChoiceAnswersProps {
@@ -6,11 +7,15 @@ interface MultipleChoiceAnswersProps {
 
 function MultipleChoiceAnswers({ question }: MultipleChoiceAnswersProps) {
   return question.options.map((option, index) => (
-    <label key={index}>
+    <Label key={index}>
       {/* TODO remove name? */}
-      <input type="checkbox" name={`${question.id}-${index}`} />
+      <input
+        type="checkbox"
+        name={`${question.id}-${index}`}
+        className="appearance-none size-5 border-2 border-stone-500 rounded-sm grid place-items-center before:size-[14px] before:clip-close checked:before:bg-teal-700"
+      />
       {option}
-    </label>
+    </Label>
   ));
 }
 
