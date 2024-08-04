@@ -1,3 +1,4 @@
+import "@fontsource/inter";
 import AppContent from "./AppContent";
 
 function App() {
