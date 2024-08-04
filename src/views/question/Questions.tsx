@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useLayoutEffect, useState } from "react";
 import { QuestionId, Question as QuestionType } from "../../types";
 import Question from "./Question";
+import QuestionLayout from "./QuestionLayout";
 
 interface QuestionsProps {
   questions: QuestionType[];
@@ -49,12 +50,9 @@ function Questions({ questions, setAreQuestionsDone }: QuestionsProps) {
       : undefined;
 
   return (
-    <Question
-      key={currentQuestion.id}
-      question={currentQuestion}
-      onNext={handleNext}
-      onBack={handleBack}
-    />
+    <QuestionLayout onNext={handleNext} onBack={handleBack}>
+      <Question key={currentQuestion.id} question={currentQuestion} />
+    </QuestionLayout>
   );
 }
 
