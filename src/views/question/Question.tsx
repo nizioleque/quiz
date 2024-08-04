@@ -10,35 +10,54 @@ interface QuestionProps {
 function Question({ question, onBack, onNext }: QuestionProps) {
   return (
     <form
+      className="flex items-center"
       onSubmit={(event) => {
         event.preventDefault();
         onNext();
       }}
     >
-      {question.title && <h1>{question.title}</h1>}
+      <div className="bg-stone-200/25 border-stone-300 border-2 rounded-md p-8 overflow-hidden max-w-[600px]">
+        {question.image && (
+          <div className="-mt-8 -mx-8 mb-8">
+            <img
+              className="w-full h-auto object-cover"
+              src={question.image}
+              // TODO add/remove alt text?
+              alt="Question"
+            />
+          </div>
+        )}
 
-      {question.description && <p>{question.description}</p>}
+        <div className="flex flex-col gap-4">
+          {question.title && (
+            <h1 className="text-2xl text-stone-700">{question.title}</h1>
+          )}
 
-      {question.image && (
-        <img
-          src={question.image}
-          // TODO add/remove alt text?
-          alt="Question"
-        />
-      )}
+          {question.description && (
+            <p className="text-stone-700">{question.description}</p>
+          )}
 
-      <fieldset>
-        <legend>{question.question}</legend>
-
-        <QuestionAnswers question={question} />
-      </fieldset>
+          <fieldset className="mt-4 first:mt-0">
+            <legend className="text-lg font-semibold mb-2">
+              {question.question}
+            </legend>
+            <div className="flex flex-col gap-1">
+              <QuestionAnswers question={question} />
+            </div>
+          </fieldset>
+        </div>
+      </div>
 
       {onBack && (
-        <button type="button" onClick={onBack}>
-          Back
-        </button>
+        <div className="order-first overflow-visible">
+          <button type="button" onClick={onBack}>
+            Back
+          </button>
+        </div>
       )}
-      <button type="submit">Next</button>
+      <div className="order-last overflow-visible">
+        <button type="submit">Next</button>
+      </div>
     </form>
   );
 }

@@ -15,10 +15,6 @@
 }
 
 @layer components {
-  .h1 {
-    @apply text-3xl font-light;
-  }
-
   .button {
     @apply inline-block bg-teal-500 text-white hover:bg-teal-700 px-5 py-2.5 text-sm rounded-md font-semibold;
   }
