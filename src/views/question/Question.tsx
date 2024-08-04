@@ -38,10 +38,10 @@ function Question({ question, onBack, onNext }: QuestionProps) {
           )}
 
           <fieldset className="mt-4 first:mt-0">
-            <legend className="text-lg font-semibold mb-2">
+            <legend className="text-xl font-semibold mb-3">
               {question.question}
             </legend>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-2">
               <QuestionAnswers question={question} />
             </div>
           </fieldset>
