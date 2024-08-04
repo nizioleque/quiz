@@ -1,6 +1,9 @@
+export type QuestionId = string | number;
+
 interface QuestionBase {
-  id: string | number;
+  id: QuestionId;
   type: string;
+  nextQuestionId?: QuestionId;
 
   /** Image URL */
   image?: string;

@@ -3,14 +3,17 @@ import QuestionAnswers from "./Answers";
 
 interface QuestionProps {
   question: QuestionType;
+  onNext: () => void;
+  onBack?: () => void;
 }
 
-function Question({ question }: QuestionProps) {
+function Question({ question, onBack, onNext }: QuestionProps) {
   return (
     <form
-      // prevent showing answers in URL when JS is disabled
-      // TODO prevent submission?
-      method="post"
+      onSubmit={(event) => {
+        event.preventDefault();
+        onNext();
+      }}
     >
       {question.title && <h1>{question.title}</h1>}
 
@@ -30,6 +33,11 @@ function Question({ question }: QuestionProps) {
         <QuestionAnswers question={question} />
       </fieldset>
 
+      {onBack && (
+        <button type="button" onClick={onBack}>
+          Back
+        </button>
+      )}
       <button type="submit">Next</button>
     </form>
   );
