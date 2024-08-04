@@ -28,7 +28,7 @@ function Questions({ questions, setAreQuestionsDone }: QuestionsProps) {
   const handleNext = () => {
     const nextId = currentQuestion.nextQuestionId;
 
-    if (!nextId) {
+    if (nextId === undefined) {
       setAreQuestionsDone(true);
       return;
     }
