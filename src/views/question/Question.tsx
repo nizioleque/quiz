@@ -1,5 +1,6 @@
 import { Question as QuestionType } from "../../types";
 import QuestionAnswers from "./Answers";
+import NavButton from "./NavButton";
 
 interface QuestionProps {
   question: QuestionType;
@@ -9,16 +10,10 @@ interface QuestionProps {
 
 function Question({ question, onBack, onNext }: QuestionProps) {
   const backButton = onBack ? (
-    <button type="button" onClick={onBack}>
-      Back
-    </button>
+    <NavButton direction="back" onClick={onBack} />
   ) : null;
 
-  const nextButton = (
-    <button type="submit" onClick={onNext}>
-      Next
-    </button>
-  );
+  const nextButton = <NavButton direction="next" onClick={onNext} />;
 
   return (
     <form
