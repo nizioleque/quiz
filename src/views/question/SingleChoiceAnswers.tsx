@@ -1,4 +1,4 @@
-import { SingleChoiceQuestion } from "../types";
+import { SingleChoiceQuestion } from "../../types";
 
 interface SingleChoiceAnswersProps {
   question: SingleChoiceQuestion;

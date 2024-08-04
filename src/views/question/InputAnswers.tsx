@@ -1,4 +1,4 @@
-import { InputQuestion } from "../types";
+import { InputQuestion } from "../../types";
 
 interface InputAnswersProps {
   question: InputQuestion;

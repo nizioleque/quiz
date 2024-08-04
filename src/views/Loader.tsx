@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { Question } from "./types";
+import { Question } from "../types";
 
 interface LoaderProps {
   setQuestions: Dispatch<SetStateAction<Question[] | null>>;
