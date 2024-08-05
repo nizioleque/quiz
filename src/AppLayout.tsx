@@ -5,11 +5,7 @@ interface AppLayoutProps {
 }
 
 function AppLayout({ children }: AppLayoutProps) {
-  return (
-    <div className="h-full flex flex-col justify-center items-center">
-      {children}
-    </div>
-  );
+  return <div className="h-full flex flex-col">{children}</div>;
 }
 
 export default AppLayout;

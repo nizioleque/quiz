@@ -1,5 +1,5 @@
 function ThankYou() {
-  return <div>ThankYou</div>;
+  return <div className="m-auto">ThankYou</div>;
 }
 
 export default ThankYou;

@@ -30,7 +30,7 @@ function Loader({ setQuestions }: LoaderProps) {
   };
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 m-auto">
       <h1 className="text-3xl font-light mb-3">Questionnaire app</h1>
       <p>Upload a quiz definition to get started</p>
       <label className="self-start">

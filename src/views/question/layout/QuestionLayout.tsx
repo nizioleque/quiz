@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { ReactNode } from "react";
 import { QuestionId } from "../../../types";
+import NavButton from "./NavButton";
 import ProgressBar from "./ProgressBar";
-import QuestionLayoutButtons from "./QuestionLayoutButtons";
 import useProgressBarAnimation from "./useProgressBarAnimation";
 import useQuestionAnimation from "./useQuestionAnimation";
 
@@ -29,18 +29,42 @@ function QuestionLayout({
   const { heightOffset, exitingChildrenContainerRef, childrenContainerRef } =
     useProgressBarAnimation(exitingChildren);
 
+  const backButton = onBack ? (
+    <NavButton
+      direction="back"
+      onClick={() => {
+        setAnimationDirection("right");
+        onBack();
+      }}
+    />
+  ) : null;
+
+  const nextButton = (
+    <NavButton
+      direction="next"
+      onClick={() => {
+        setAnimationDirection("left");
+      }}
+    />
+  );
+
   return (
     <form
-      className="flex items-center flex-col justify-center lg:flex-row gap-y-6 lg:w-full lg:p-8"
+      className="h-full flex flex-col gap-4 max-w-[600px] w-full mx-auto p-4"
       onSubmit={(event) => {
         event.preventDefault();
         onNext();
       }}
     >
-      <div
-        key={currentId}
-        className="flex-1 max-w-[600px] relative flex flex-col justify-center"
-      >
+      <ProgressBar
+        // TODO rerun animation instead of re-rendering
+        key={`progress-${currentId}`}
+        heightOffset={heightOffset}
+        // TODO calculate and pass correct values
+        answeredQuestions={3}
+        maxQuestions={7}
+      />
+      <div key={currentId} className="flex items-center relative">
         <div
           ref={exitingChildrenContainerRef}
           className={clsx(
@@ -54,15 +78,10 @@ function QuestionLayout({
         >
           {exitingChildren}
         </div>
-        <ProgressBar
-          heightOffset={heightOffset}
-          // TODO calculate and pass correct values
-          answeredQuestions={3}
-          maxQuestions={7}
-        />
         <div
           ref={childrenContainerRef}
           className={clsx(
+            "flex-1",
             animationDirection === "left"
               ? "animate-slideInLeft"
               : "animate-slideInRight"
@@ -70,12 +89,24 @@ function QuestionLayout({
         >
           {children}
         </div>
+
+        {/* back/forward buttons for desktop */}
+        <div className="order-first overflow-visible hidden lg:flex w-0 justify-end">
+          {backButton}
+        </div>
+        <div className="order-last overflow-visible hidden lg:block w-0">
+          {nextButton}
+        </div>
       </div>
 
-      <QuestionLayoutButtons
-        onBack={onBack}
-        setAnimationDirection={setAnimationDirection}
-      />
+      {/* empty div to ensure even spacing */}
+      <div className="flex-1 invisible hidden lg:block" />
+
+      {/* back/forward buttons for mobile */}
+      <div className="flex-1 flex justify-between self-stretch lg:hidden -mx-2">
+        <div>{backButton}</div>
+        <div className="ms-auto">{nextButton}</div>
+      </div>
     </form>
   );
 }
