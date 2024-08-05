@@ -1,8 +1,10 @@
 import clsx from "clsx";
-import { ReactNode, useLayoutEffect, useRef, useState } from "react";
+import { ReactNode } from "react";
 import { QuestionId } from "../../../types";
-import NavButton from "./NavButton";
 import ProgressBar from "./ProgressBar";
+import QuestionLayoutButtons from "./QuestionLayoutButtons";
+import useProgressBarAnimation from "./useProgressBarAnimation";
+import useQuestionAnimation from "./useQuestionAnimation";
 
 interface QuestionLayoutProps {
   children: ReactNode;
@@ -17,59 +19,15 @@ function QuestionLayout({
   onNext,
   currentId,
 }: QuestionLayoutProps) {
-  const [exitingChildren, setExitingChildren] = useState<ReactNode | null>(
-    null
-  );
-  const [lastChildren, setLastChildren] = useState<ReactNode | null>(null);
-  const [animationDirection, setAnimationDirection] = useState<
-    "left" | "right"
-  >("left");
+  const {
+    exitingChildren,
+    setExitingChildren,
+    animationDirection,
+    setAnimationDirection,
+  } = useQuestionAnimation(children);
 
-  const [heightOffset, setHeightOffset] = useState<number>(0);
-  const exitingChildrenContainerRef = useRef<HTMLDivElement>(null);
-  const childrenContainerRef = useRef<HTMLDivElement>(null);
-
-  useLayoutEffect(() => {
-    if (children === lastChildren) return;
-
-    setExitingChildren(lastChildren);
-    setLastChildren(children);
-  }, [children, lastChildren]);
-
-  useLayoutEffect(() => {
-    if (
-      !exitingChildren ||
-      !exitingChildrenContainerRef.current ||
-      !childrenContainerRef.current
-    ) {
-      return;
-    }
-
-    const exitingTop =
-      exitingChildrenContainerRef.current.getBoundingClientRect().top;
-    const currentTop = childrenContainerRef.current.getBoundingClientRect().top;
-    const heightOffset = exitingTop - currentTop;
-    setHeightOffset(heightOffset);
-  }, [exitingChildren]);
-
-  const backButton = onBack ? (
-    <NavButton
-      direction="back"
-      onClick={() => {
-        setAnimationDirection("right");
-        onBack();
-      }}
-    />
-  ) : null;
-
-  const nextButton = (
-    <NavButton
-      direction="next"
-      onClick={() => {
-        setAnimationDirection("left");
-      }}
-    />
-  );
+  const { heightOffset, exitingChildrenContainerRef, childrenContainerRef } =
+    useProgressBarAnimation(exitingChildren);
 
   return (
     <form
@@ -109,19 +67,10 @@ function QuestionLayout({
         </div>
       </div>
 
-      {/* back/forward buttons for desktop */}
-      <div className="order-first overflow-visible hidden lg:flex w-0 justify-end">
-        {backButton}
-      </div>
-      <div className="order-last overflow-visible hidden lg:block w-0">
-        {nextButton}
-      </div>
-
-      {/* back/forward buttons for mobile */}
-      <div className="flex justify-between self-stretch lg:hidden -mx-2">
-        {backButton}
-        <div className="ms-auto">{nextButton}</div>
-      </div>
+      <QuestionLayoutButtons
+        onBack={onBack}
+        setAnimationDirection={setAnimationDirection}
+      />
     </form>
   );
 }
