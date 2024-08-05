@@ -47,7 +47,8 @@ function NavButton({ direction, onClick }: NavButtonProps) {
       className={clsx(
         "group flex items-center",
         direction === "back" && "flex-row-reverse",
-        "hover:bg-stone-200 p-2 rounded-md uppercase text-sm tracking-wider text-stone-700 transition-colors"
+        "hover:bg-stone-200 p-2 rounded-md uppercase text-sm tracking-wider text-stone-700 transition-colors",
+        direction === "next" ? "lg:ms-8" : "lg:me-8"
       )}
     >
       {text}

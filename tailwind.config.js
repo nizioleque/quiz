@@ -2,6 +2,7 @@ import defaultTheme from "tailwindcss/defaultTheme";
 
 const SlideDuration = "500ms";
 const EaseOutCubic = "cubic-bezier(0.33, 1, 0.68, 1)";
+const SlideSpacing = "64px";
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -18,20 +19,32 @@ export default {
       },
       keyframes: {
         slideInLeft: {
-          "0%": { opacity: 0, transform: "translateX(100%)" },
+          "0%": {
+            opacity: 0,
+            transform: `translateX(calc(100% + ${SlideSpacing}))`,
+          },
           "100%": { opacity: 1, transform: "translateX(0)" },
         },
         slideOutLeft: {
           "0%": { opacity: 1, transform: "translateX(0)" },
-          "100%": { opacity: 0, transform: "translateX(-100%)" },
+          "100%": {
+            opacity: 0,
+            transform: `translateX(calc(-100% - ${SlideSpacing}))`,
+          },
         },
         slideInRight: {
-          "0%": { opacity: 0, transform: "translateX(-100%)" },
+          "0%": {
+            opacity: 0,
+            transform: `translateX(calc(-100% - ${SlideSpacing}))`,
+          },
           "100%": { opacity: 1, transform: "translateX(0)" },
         },
         slideOutRight: {
           "0%": { opacity: 1, transform: "translateX(0)" },
-          "100%": { opacity: 0, transform: "translateX(100%)" },
+          "100%": {
+            opacity: 0,
+            transform: `translateX(calc(100% + ${SlideSpacing}))`,
+          },
         },
       },
       animation: {

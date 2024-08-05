@@ -7,7 +7,7 @@ interface QuestionProps {
 
 function Question({ question }: QuestionProps) {
   return (
-    <div className="bg-stone-150 border-stone-300 border-2 rounded-md p-8 overflow-hidden lg:mx-8">
+    <div className="bg-stone-150 border-stone-300 border-2 rounded-md p-8 overflow-hidden">
       {question.image && (
         <div className="-mt-8 -mx-8 mb-8">
           <img
