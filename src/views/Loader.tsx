@@ -40,6 +40,7 @@ function Loader({ setQuestions }: LoaderProps) {
           hidden
           onChange={(event) => loadFile(event.currentTarget.files?.[0])}
         />
+        {/* TODO fix clicking next to the button */}
         <span className="button">Select file</span>
       </label>
     </div>

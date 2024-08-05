@@ -50,8 +50,12 @@ function Questions({ questions, setAreQuestionsDone }: QuestionsProps) {
       : undefined;
 
   return (
-    <QuestionLayout onNext={handleNext} onBack={handleBack}>
-      <Question key={currentQuestion.id} question={currentQuestion} />
+    <QuestionLayout
+      currentId={currentId}
+      onNext={handleNext}
+      onBack={handleBack}
+    >
+      <Question question={currentQuestion} />
     </QuestionLayout>
   );
 }
