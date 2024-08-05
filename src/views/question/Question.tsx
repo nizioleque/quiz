@@ -13,8 +13,7 @@ function Question({ question }: QuestionProps) {
           <img
             className="w-full h-auto object-cover"
             src={question.image}
-            // TODO add/remove alt text?
-            alt="Question"
+            alt={question.imageAlt ?? ""}
           />
         </div>
       )}

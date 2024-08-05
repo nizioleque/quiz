@@ -7,6 +7,7 @@ interface QuestionBase {
 
   /** Image URL */
   image?: string;
+  imageAlt?: string;
   title?: string;
   description?: string;
 
