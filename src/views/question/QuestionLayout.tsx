@@ -46,7 +46,6 @@ function QuestionLayout({
       direction="next"
       onClick={() => {
         setAnimationDirection("left");
-        onNext();
       }}
     />
   );
