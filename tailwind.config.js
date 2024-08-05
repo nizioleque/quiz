@@ -46,12 +46,17 @@ export default {
             transform: `translateX(calc(100% + ${SlideSpacing}))`,
           },
         },
+        slideToHeight: {
+          "0%": { transform: "translateY(var(--slide-height, 100px))" },
+          "100%": { transform: `translateY(0)` },
+        },
       },
       animation: {
         slideInLeft: `slideInLeft ${SlideDuration} ${EaseOutCubic}`,
         slideOutLeft: `slideOutLeft ${SlideDuration} ${EaseOutCubic} forwards`,
         slideInRight: `slideInRight ${SlideDuration} ${EaseOutCubic}`,
         slideOutRight: `slideOutRight ${SlideDuration} ${EaseOutCubic} forwards`,
+        slideToHeight: `slideToHeight ${SlideDuration} ${EaseOutCubic}`,
       },
     },
   },

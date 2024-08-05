@@ -1,7 +1,8 @@
 import clsx from "clsx";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useLayoutEffect, useRef, useState } from "react";
 import { QuestionId } from "../../types";
 import NavButton from "./NavButton";
+import ProgressBar from "./ProgressBar";
 
 interface QuestionLayoutProps {
   children: ReactNode;
@@ -24,12 +25,32 @@ function QuestionLayout({
     "left" | "right"
   >("left");
 
-  useEffect(() => {
+  const [heightOffset, setHeightOffset] = useState<number>(0);
+  const exitingChildrenContainerRef = useRef<HTMLDivElement>(null);
+  const childrenContainerRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
     if (children === lastChildren) return;
 
     setExitingChildren(lastChildren);
     setLastChildren(children);
   }, [children, lastChildren]);
+
+  useLayoutEffect(() => {
+    if (
+      !exitingChildren ||
+      !exitingChildrenContainerRef.current ||
+      !childrenContainerRef.current
+    ) {
+      return;
+    }
+
+    const exitingTop =
+      exitingChildrenContainerRef.current.getBoundingClientRect().top;
+    const currentTop = childrenContainerRef.current.getBoundingClientRect().top;
+    const heightOffset = exitingTop - currentTop;
+    setHeightOffset(heightOffset);
+  }, [exitingChildren]);
 
   const backButton = onBack ? (
     <NavButton
@@ -63,6 +84,7 @@ function QuestionLayout({
         className="flex-1 max-w-[600px] relative flex flex-col justify-center"
       >
         <div
+          ref={exitingChildrenContainerRef}
           className={clsx(
             "absolute w-full",
             animationDirection === "left"
@@ -74,7 +96,9 @@ function QuestionLayout({
         >
           {exitingChildren}
         </div>
+        <ProgressBar heightOffset={heightOffset} />
         <div
+          ref={childrenContainerRef}
           className={clsx(
             animationDirection === "left"
               ? "animate-slideInLeft"
