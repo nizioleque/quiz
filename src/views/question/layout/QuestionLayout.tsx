@@ -54,7 +54,12 @@ function QuestionLayout({
         >
           {exitingChildren}
         </div>
-        <ProgressBar heightOffset={heightOffset} />
+        <ProgressBar
+          heightOffset={heightOffset}
+          // TODO calculate and pass correct values
+          answeredQuestions={3}
+          maxQuestions={7}
+        />
         <div
           ref={childrenContainerRef}
           className={clsx(

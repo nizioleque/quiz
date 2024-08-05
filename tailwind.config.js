@@ -56,7 +56,7 @@ export default {
         slideOutLeft: `slideOutLeft ${SlideDuration} ${EaseOutCubic} forwards`,
         slideInRight: `slideInRight ${SlideDuration} ${EaseOutCubic}`,
         slideOutRight: `slideOutRight ${SlideDuration} ${EaseOutCubic} forwards`,
-        slideToHeight: `slideToHeight ${SlideDuration} ${EaseOutCubic}`,
+        slideToHeight: `slideToHeight 400ms ${EaseOutCubic}`,
       },
     },
   },
