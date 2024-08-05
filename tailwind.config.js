@@ -1,5 +1,8 @@
 import defaultTheme from "tailwindcss/defaultTheme";
 
+const SlideDuration = "500ms";
+const EaseOutCubic = "cubic-bezier(0.33, 1, 0.68, 1)";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
@@ -32,10 +35,10 @@ export default {
         },
       },
       animation: {
-        slideInLeft: "slideInLeft 500ms ease-out",
-        slideOutLeft: "slideOutLeft 500ms ease-out forwards",
-        slideInRight: "slideInRight 500ms ease-out",
-        slideOutRight: "slideOutRight 500ms ease-out forwards",
+        slideInLeft: `slideInLeft ${SlideDuration} ${EaseOutCubic}`,
+        slideOutLeft: `slideOutLeft ${SlideDuration} ${EaseOutCubic} forwards`,
+        slideInRight: `slideInRight ${SlideDuration} ${EaseOutCubic}`,
+        slideOutRight: `slideOutRight ${SlideDuration} ${EaseOutCubic} forwards`,
       },
     },
   },
