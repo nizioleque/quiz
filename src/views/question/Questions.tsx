@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useLayoutEffect, useState } from "react";
 import { QuestionId, Question as QuestionType } from "../../types";
 import Question from "./Question";
-import QuestionLayout from "./QuestionLayout";
+import QuestionLayout from "./layout/QuestionLayout";
 
 interface QuestionsProps {
   questions: QuestionType[];

@@ -1,5 +1,5 @@
 import { Question as QuestionType } from "../../types";
-import QuestionAnswers from "./Answers";
+import QuestionAnswers from "./answers/Answers";
 
 interface QuestionProps {
   question: QuestionType;

@@ -1,5 +1,5 @@
-import Label from "../../components/Label";
-import { MultipleChoiceQuestion } from "../../types";
+import Label from "../../../components/Label";
+import { MultipleChoiceQuestion } from "../../../types";
 
 interface MultipleChoiceAnswersProps {
   question: MultipleChoiceQuestion;

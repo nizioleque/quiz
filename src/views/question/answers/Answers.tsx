@@ -1,4 +1,4 @@
-import { Question } from "../../types";
+import { Question } from "../../../types";
 import InputAnswers from "./InputAnswers";
 import MultipleChoiceAnswers from "./MultipleChoiceAnswers";
 import SingleChoiceAnswers from "./SingleChoiceAnswers";

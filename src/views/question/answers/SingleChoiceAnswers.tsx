@@ -1,5 +1,5 @@
-import Label from "../../components/Label";
-import { SingleChoiceQuestion } from "../../types";
+import Label from "../../../components/Label";
+import { SingleChoiceQuestion } from "../../../types";
 
 interface SingleChoiceAnswersProps {
   question: SingleChoiceQuestion;

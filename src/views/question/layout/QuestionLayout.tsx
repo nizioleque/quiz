@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ReactNode, useLayoutEffect, useRef, useState } from "react";
-import { QuestionId } from "../../types";
+import { QuestionId } from "../../../types";
 import NavButton from "./NavButton";
 import ProgressBar from "./ProgressBar";
 
