@@ -33,14 +33,13 @@ function Loader({ setQuestions }: LoaderProps) {
     <div className="flex flex-col gap-3">
       <h1 className="text-3xl font-light mb-3">Questionnaire app</h1>
       <p>Upload a quiz definition to get started</p>
-      <label>
+      <label className="self-start">
         <input
           type="file"
           accept=".json"
           hidden
           onChange={(event) => loadFile(event.currentTarget.files?.[0])}
         />
-        {/* TODO fix clicking next to the button */}
         <span className="button">Select file</span>
       </label>
     </div>
