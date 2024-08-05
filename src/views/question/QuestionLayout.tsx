@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { ReactNode, useEffect, useState } from "react";
 import { QuestionId } from "../../types";
 import NavButton from "./NavButton";
@@ -19,6 +20,9 @@ function QuestionLayout({
     null
   );
   const [lastChildren, setLastChildren] = useState<ReactNode | null>(null);
+  const [animationDirection, setAnimationDirection] = useState<
+    "left" | "right"
+  >("left");
 
   useEffect(() => {
     if (children === lastChildren) return;
@@ -28,10 +32,24 @@ function QuestionLayout({
   }, [children, lastChildren]);
 
   const backButton = onBack ? (
-    <NavButton direction="back" onClick={onBack} />
+    <NavButton
+      direction="back"
+      onClick={() => {
+        setAnimationDirection("right");
+        onBack();
+      }}
+    />
   ) : null;
 
-  const nextButton = <NavButton direction="next" onClick={onNext} />;
+  const nextButton = (
+    <NavButton
+      direction="next"
+      onClick={() => {
+        setAnimationDirection("left");
+        onNext();
+      }}
+    />
+  );
 
   return (
     <form
@@ -46,13 +64,26 @@ function QuestionLayout({
         className="flex-1 max-w-[600px] relative flex flex-col justify-center"
       >
         <div
-          className="absolute w-full animate-slideOutLeft"
+          className={clsx(
+            "absolute w-full",
+            animationDirection === "left"
+              ? "animate-slideOutLeft"
+              : "animate-slideOutRight"
+          )}
           onAnimationEnd={() => setExitingChildren(null)}
           aria-hidden
         >
           {exitingChildren}
         </div>
-        <div className="animate-slideInLeft">{children}</div>
+        <div
+          className={clsx(
+            animationDirection === "left"
+              ? "animate-slideInLeft"
+              : "animate-slideInRight"
+          )}
+        >
+          {children}
+        </div>
       </div>
 
       {/* back/forward buttons for desktop */}
