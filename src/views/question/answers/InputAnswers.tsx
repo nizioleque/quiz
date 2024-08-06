@@ -1,12 +1,7 @@
-import { InputQuestion } from "../../../types";
 import { useAnswerContext } from "../AnswerContext";
 
-interface InputAnswersProps {
-  question: InputQuestion;
-}
-
-function InputAnswers({ question }: InputAnswersProps) {
-  const { answer, updateAnswer } = useAnswerContext(question.id);
+function InputAnswers() {
+  const { answer, updateAnswer } = useAnswerContext();
 
   return (
     <input

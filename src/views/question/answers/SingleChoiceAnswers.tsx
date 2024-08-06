@@ -7,7 +7,7 @@ interface SingleChoiceAnswersProps {
 }
 
 function SingleChoiceAnswers({ question }: SingleChoiceAnswersProps) {
-  const { answer, updateAnswer } = useAnswerContext(question.id);
+  const { answer, updateAnswer } = useAnswerContext();
 
   return question.options.map((option, index) => (
     <Label key={index}>
