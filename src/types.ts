@@ -31,3 +31,5 @@ export type Question =
   | SingleChoiceQuestion
   | MultipleChoiceQuestion
   | InputQuestion;
+
+export type Answer = number | number[] | string;

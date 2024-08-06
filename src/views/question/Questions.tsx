@@ -1,5 +1,6 @@
-import { Dispatch, SetStateAction, useMemo } from "react";
-import { Question as QuestionType } from "../../types";
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
+import { Answer, QuestionId, Question as QuestionType } from "../../types";
+import AnswerContext from "./AnswerContext";
 import QuestionLayout from "./layout/QuestionLayout";
 import Question from "./Question";
 import useQuestionNavigation from "./useQuestionNavigation";
@@ -13,6 +14,8 @@ function Questions({ questions, setAreQuestionsDone }: QuestionsProps) {
   const navigationState = useQuestionNavigation(questions, setAreQuestionsDone);
   const { currentId } = navigationState;
 
+  const [answers, setAnswers] = useState<Record<QuestionId, Answer>>({});
+
   const currentQuestion = useMemo(
     () => questions.find((question) => question.id === currentId),
     [currentId, questions]
@@ -22,7 +25,9 @@ function Questions({ questions, setAreQuestionsDone }: QuestionsProps) {
 
   return (
     <QuestionLayout navigationState={navigationState}>
-      <Question question={currentQuestion} />
+      <AnswerContext.Provider value={{ answers, setAnswers }}>
+        <Question question={currentQuestion} />
+      </AnswerContext.Provider>
     </QuestionLayout>
   );
 }

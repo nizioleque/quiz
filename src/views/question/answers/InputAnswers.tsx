@@ -1,13 +1,18 @@
 import { InputQuestion } from "../../../types";
+import { useAnswerContext } from "../AnswerContext";
 
 interface InputAnswersProps {
   question: InputQuestion;
 }
 
 function InputAnswers({ question }: InputAnswersProps) {
+  const { answer, updateAnswer } = useAnswerContext(question.id);
+
   return (
-    // TODO remove name?
-    <input name={question.id.toString()} />
+    <input
+      value={answer?.toString() ?? ""}
+      onChange={(event) => updateAnswer(event.currentTarget.value)}
+    />
   );
 }
 
