@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { QuestionId } from "../../../types";
+import useQuestionNavigation from "../useQuestionNavigation";
 import ProgressBar from "./ProgressBar";
 import QuestionAnimation from "./QuestionAnimation";
 import useNavButtons from "./useNavButtons";
@@ -8,38 +8,42 @@ import useQuestionAnimation from "./useQuestionAnimation";
 
 interface QuestionLayoutProps {
   children: ReactNode;
-  onNext: () => void;
-  onBack?: () => void;
-  currentId: QuestionId;
+  navigationState: ReturnType<typeof useQuestionNavigation>;
 }
 
-function QuestionLayout({
-  children,
-  onBack,
-  onNext,
-  currentId,
-}: QuestionLayoutProps) {
+function QuestionLayout({ children, navigationState }: QuestionLayoutProps) {
+  const { currentId, navigateBack, navigateNext } = navigationState;
+
   const {
     exitingChildren,
     handleAnimationEnd,
     animationDirection,
     setAnimationDirection,
-  } = useQuestionAnimation(children);
+  } = useQuestionAnimation(children, currentId);
 
   const { heightOffset, exitingChildrenContainerRef, childrenContainerRef } =
     useProgressBarAnimation(exitingChildren);
 
-  const { desktopButtons, mobileButtons } = useNavButtons(
-    setAnimationDirection,
-    onBack
-  );
+  const handleBack = navigateBack
+    ? () => {
+        setAnimationDirection("right");
+        navigateBack();
+      }
+    : undefined;
+
+  const handleNext = () => {
+    setAnimationDirection("left");
+    navigateNext();
+  };
+
+  const { desktopButtons, mobileButtons } = useNavButtons(handleBack);
 
   return (
     <form
       className="h-full flex flex-col gap-4 max-w-[600px] w-full mx-auto p-4"
       onSubmit={(event) => {
         event.preventDefault();
-        onNext();
+        handleNext();
       }}
     >
       <ProgressBar

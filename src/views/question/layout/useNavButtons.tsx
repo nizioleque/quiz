@@ -1,28 +1,11 @@
-import { Dispatch, SetStateAction } from "react";
 import NavButton from "./NavButton";
 
-function useNavButtons(
-  setAnimationDirection: Dispatch<SetStateAction<"left" | "right">>,
-  onBack?: () => void
-) {
+function useNavButtons(onBack: (() => void) | undefined) {
   const backButton = onBack ? (
-    <NavButton
-      direction="back"
-      onClick={() => {
-        setAnimationDirection("right");
-        onBack();
-      }}
-    />
+    <NavButton direction="back" onClick={onBack} />
   ) : null;
 
-  const nextButton = (
-    <NavButton
-      direction="next"
-      onClick={() => {
-        setAnimationDirection("left");
-      }}
-    />
-  );
+  const nextButton = <NavButton direction="next" />;
 
   const desktopButtons = (
     <>

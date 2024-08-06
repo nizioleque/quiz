@@ -23,7 +23,7 @@ function useQuestionNavigation(
     setCurrentId(firstId);
   }, [questions]);
 
-  const handleNext = () => {
+  const navigateNext = () => {
     if (nextId === undefined) {
       setAreQuestionsDone(true);
       return;
@@ -32,13 +32,13 @@ function useQuestionNavigation(
     setCurrentId(nextId);
   };
 
-  const handleBack =
+  const navigateBack =
     previousId !== undefined ? () => setCurrentId(previousId) : undefined;
 
   return {
     currentId,
-    handleBack,
-    handleNext,
+    navigateBack,
+    navigateNext,
   };
 }
 

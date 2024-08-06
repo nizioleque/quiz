@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 interface NavButtonProps {
   direction: "next" | "back";
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const BackIcon = (

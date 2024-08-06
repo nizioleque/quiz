@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useMemo } from "react";
 import { Question as QuestionType } from "../../types";
-import Question from "./Question";
 import QuestionLayout from "./layout/QuestionLayout";
+import Question from "./Question";
 import useQuestionNavigation from "./useQuestionNavigation";
 
 interface QuestionsProps {
@@ -10,10 +10,8 @@ interface QuestionsProps {
 }
 
 function Questions({ questions, setAreQuestionsDone }: QuestionsProps) {
-  const { currentId, handleBack, handleNext } = useQuestionNavigation(
-    questions,
-    setAreQuestionsDone
-  );
+  const navigationState = useQuestionNavigation(questions, setAreQuestionsDone);
+  const { currentId } = navigationState;
 
   const currentQuestion = useMemo(
     () => questions.find((question) => question.id === currentId),
@@ -23,11 +21,7 @@ function Questions({ questions, setAreQuestionsDone }: QuestionsProps) {
   if (currentId === null || currentQuestion === undefined) return null;
 
   return (
-    <QuestionLayout
-      currentId={currentId}
-      onNext={handleNext}
-      onBack={handleBack}
-    >
+    <QuestionLayout navigationState={navigationState}>
       <Question question={currentQuestion} />
     </QuestionLayout>
   );
