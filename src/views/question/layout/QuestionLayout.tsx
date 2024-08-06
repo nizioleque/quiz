@@ -17,8 +17,14 @@ function QuestionLayout({
   navigationState,
   maxQuestions,
 }: QuestionLayoutProps) {
-  const { currentId, navigateBack, navigateNext, currentIndex } =
-    navigationState;
+  const {
+    currentId,
+    navigateBack,
+    navigateNext,
+    currentIndex,
+    disableBackButton,
+    disableNextButton,
+  } = navigationState;
 
   const {
     exitingChildren,
@@ -46,7 +52,11 @@ function QuestionLayout({
     navigateNext();
   };
 
-  const { desktopButtons, mobileButtons } = useNavButtons(handleBack);
+  const { desktopButtons, mobileButtons } = useNavButtons(
+    handleBack,
+    disableBackButton,
+    disableNextButton
+  );
 
   return (
     <form

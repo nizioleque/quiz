@@ -1,25 +1,16 @@
-import { useQuestionContext } from "../QuestionContext";
 import NavButton from "./NavButton";
 
-function useNavButtons(onBack: (() => void) | undefined) {
-  const { question, answer } = useQuestionContext();
-
+function useNavButtons(
+  onBack: (() => void) | undefined,
+  disableBackButton: boolean,
+  disableNextButton: boolean
+) {
   const backButton = (
-    <NavButton
-      direction="back"
-      onClick={onBack}
-      disabled={onBack === undefined}
-    />
+    <NavButton direction="back" onClick={onBack} disabled={disableBackButton} />
   );
 
   const nextButton = (
-    <NavButton
-      direction="next"
-      disabled={
-        (question.type === "single-choice" && answer === undefined) ||
-        (question.type === "input" && (answer === undefined || answer === ""))
-      }
-    />
+    <NavButton direction="next" disabled={disableNextButton} />
   );
 
   const desktopButtons = (

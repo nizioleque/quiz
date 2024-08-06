@@ -42,6 +42,9 @@ function useQuestionNavigation(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questions]);
 
+  const navigateBack =
+    previousId !== undefined ? () => setCurrentId(previousId) : undefined;
+
   const navigateNext = () => {
     if (nextId === undefined) {
       setAreQuestionsDone(true);
@@ -51,14 +54,28 @@ function useQuestionNavigation(
     setCurrentId(nextId);
   };
 
-  const navigateBack =
-    previousId !== undefined ? () => setCurrentId(previousId) : undefined;
+  const question = useMemo(
+    () => questions?.find((question) => question.id === currentId),
+    [currentId, questions]
+  );
+
+  const answer = useMemo(
+    () => (currentId !== null ? questionsState.answers[currentId] : undefined),
+    [questionsState.answers, currentId]
+  );
+
+  const disableBackButton = navigateBack === undefined;
+  const disableNextButton =
+    (question?.type === "single-choice" && answer === undefined) ||
+    (question?.type === "input" && (answer === undefined || answer === ""));
 
   return {
     currentId,
     currentIndex,
     navigateBack,
     navigateNext,
+    disableBackButton,
+    disableNextButton,
   };
 }
 

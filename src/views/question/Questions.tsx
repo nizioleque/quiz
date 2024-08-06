@@ -45,14 +45,14 @@ function Questions({ questionsState, setAreQuestionsDone }: QuestionsProps) {
   if (currentId === null || question === undefined) return null;
 
   return (
-    <QuestionContext.Provider value={{ question, answer, updateAnswer }}>
-      <QuestionLayout
-        navigationState={navigationState}
-        maxQuestions={questions?.length ?? 0}
-      >
+    <QuestionLayout
+      navigationState={navigationState}
+      maxQuestions={questions?.length ?? 0}
+    >
+      <QuestionContext.Provider value={{ question, answer, updateAnswer }}>
         <Question question={question} />
-      </QuestionLayout>
-    </QuestionContext.Provider>
+      </QuestionContext.Provider>
+    </QuestionLayout>
   );
 }
 
