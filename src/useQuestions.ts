@@ -67,6 +67,10 @@ function useQuestions() {
         { affectedQuestionId: id, action }: QuestionCondition,
         enabled: boolean
       ) {
+        const affectedQuestion = questions?.find(
+          (question) => question.id === id
+        );
+
         setIsQuestionShown(
           produce((isQuestionShown) => {
             if (enabled) {
@@ -75,13 +79,22 @@ function useQuestions() {
               // restore defaultHidden
               // TODO improve logic to handle cases where multiple
               // conditions affect the same question
-              const question = questions?.find(
-                (question) => question.id === id
-              );
-              isQuestionShown[id] = !question?.defaultHidden;
+              isQuestionShown[id] = !affectedQuestion?.defaultHidden;
             }
           })
         );
+
+        // remove answers if the question is hidden
+        if (
+          (!enabled && affectedQuestion?.defaultHidden) ||
+          (enabled && action === "hide" && !affectedQuestion?.defaultHidden)
+        ) {
+          setAnswers(
+            produce((answers) => {
+              delete answers[id];
+            })
+          );
+        }
       }
     },
     [answers, questions]
