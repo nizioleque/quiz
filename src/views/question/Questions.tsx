@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, useCallback, useMemo } from "react";
 import { Answer } from "../../types";
 import useQuestions from "../../useQuestions";
-import AnswerContext from "./AnswerContext";
 import QuestionLayout from "./layout/QuestionLayout";
 import Question from "./Question";
+import QuestionContext from "./QuestionContext";
 import useQuestionNavigation from "./useQuestionNavigation";
 
 interface QuestionsProps {
@@ -45,14 +45,14 @@ function Questions({ questionsState, setAreQuestionsDone }: QuestionsProps) {
   if (currentId === null || question === undefined) return null;
 
   return (
-    <QuestionLayout
-      navigationState={navigationState}
-      maxQuestions={questions?.length ?? 0}
-    >
-      <AnswerContext.Provider value={{ answer, updateAnswer }}>
+    <QuestionContext.Provider value={{ question, answer, updateAnswer }}>
+      <QuestionLayout
+        navigationState={navigationState}
+        maxQuestions={questions?.length ?? 0}
+      >
         <Question question={question} />
-      </AnswerContext.Provider>
-    </QuestionLayout>
+      </QuestionLayout>
+    </QuestionContext.Provider>
   );
 }
 

@@ -3,6 +3,7 @@ import clsx from "clsx";
 interface NavButtonProps {
   direction: "next" | "back";
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const BackIcon = (
@@ -35,7 +36,7 @@ const NextIcon = (
   </svg>
 );
 
-function NavButton({ direction, onClick }: NavButtonProps) {
+function NavButton({ direction, onClick, disabled }: NavButtonProps) {
   const icon = direction === "next" ? NextIcon : BackIcon;
   const text = direction === "next" ? "Next" : "Back";
   const type = direction === "next" ? "submit" : "button";
@@ -43,12 +44,14 @@ function NavButton({ direction, onClick }: NavButtonProps) {
   return (
     <button
       type={type}
+      disabled={disabled}
       onClick={onClick}
       className={clsx(
         "group flex items-center",
         direction === "back" && "flex-row-reverse",
         "hover:bg-stone-200 p-2 rounded-md uppercase text-sm tracking-wider text-stone-700 transition-colors",
-        direction === "next" ? "lg:ms-8" : "lg:me-8"
+        direction === "next" ? "lg:ms-8" : "lg:me-8",
+        "disabled:text-stone-400 disabled:pointer-events-none"
       )}
     >
       {text}

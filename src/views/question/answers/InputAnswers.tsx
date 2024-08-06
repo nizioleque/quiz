@@ -1,7 +1,7 @@
-import { useAnswerContext } from "../AnswerContext";
+import { useQuestionContext } from "../QuestionContext";
 
 function InputAnswers() {
-  const { answer, updateAnswer } = useAnswerContext();
+  const { answer, updateAnswer } = useQuestionContext();
 
   return (
     <input

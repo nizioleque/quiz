@@ -1,13 +1,13 @@
 import Label from "../../../components/Label";
 import { SingleChoiceQuestion } from "../../../types";
-import { useAnswerContext } from "../AnswerContext";
+import { useQuestionContext } from "../QuestionContext";
 
 interface SingleChoiceAnswersProps {
   question: SingleChoiceQuestion;
 }
 
 function SingleChoiceAnswers({ question }: SingleChoiceAnswersProps) {
-  const { answer, updateAnswer } = useAnswerContext();
+  const { answer, updateAnswer } = useQuestionContext();
 
   return question.options.map((option, index) => (
     <Label key={index}>

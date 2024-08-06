@@ -1,13 +1,13 @@
 import Label from "../../../components/Label";
 import { MultipleChoiceQuestion } from "../../../types";
-import { useAnswerContext } from "../AnswerContext";
+import { useQuestionContext } from "../QuestionContext";
 
 interface MultipleChoiceAnswersProps {
   question: MultipleChoiceQuestion;
 }
 
 function MultipleChoiceAnswers({ question }: MultipleChoiceAnswersProps) {
-  const { answer, updateAnswer } = useAnswerContext();
+  const { answer, updateAnswer } = useQuestionContext();
 
   return question.options.map((option, index) => (
     <Label key={index}>
