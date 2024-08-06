@@ -5,7 +5,7 @@ interface AppLayoutProps {
 }
 
 function AppLayout({ children }: AppLayoutProps) {
-  return <div className="h-full flex flex-col">{children}</div>;
+  return <div className="h-full flex flex-col p-4">{children}</div>;
 }
 
 export default AppLayout;

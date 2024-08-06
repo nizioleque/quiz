@@ -60,7 +60,7 @@ function QuestionLayout({
 
   return (
     <form
-      className="h-full flex flex-col gap-4 max-w-[600px] w-full mx-auto p-4"
+      className="h-full flex flex-col gap-4 max-w-[600px] w-full mx-auto"
       onSubmit={(event) => {
         event.preventDefault();
         handleNext();
