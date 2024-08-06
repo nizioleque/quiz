@@ -7,7 +7,7 @@ interface LoaderProps {
 }
 
 function Loader({ setQuestions, setIsQuestionShown }: LoaderProps) {
-  const loadFile = async (file: File | undefined) => {
+  const loadFile = async (file: Blob | undefined) => {
     if (!file) return;
 
     try {
@@ -27,19 +27,46 @@ function Loader({ setQuestions, setIsQuestionShown }: LoaderProps) {
     }
   };
 
+  const loadServerFile = async (name: string) => {
+    const file = await fetch(`/example-quizes/${name}.json`);
+    loadFile(await file.blob());
+  };
+
   return (
-    <div className="flex flex-col gap-3 m-auto">
-      <h1 className="text-3xl font-light mb-3">Questionnaire app</h1>
-      <p>Upload a quiz definition to get started</p>
-      <label className="self-start">
-        <input
-          type="file"
-          accept=".json"
-          hidden
-          onChange={(event) => loadFile(event.currentTarget.files?.[0])}
-        />
-        <span className="button">Select file</span>
-      </label>
+    <div className="flex flex-col items-start m-auto">
+      <h1 className="text-3xl font-light mb-12">Welcome to the Quiz app!</h1>
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-2">
+          <p>Upload a quiz definition to get started</p>
+          <label className="group">
+            <input
+              type="file"
+              accept=".json"
+              // input cannot be hidden because we need focus for accessibility
+              className="size-0"
+              onChange={(event) => loadFile(event.currentTarget.files?.[0])}
+            />
+            <div className="button max-w-[200px] w-full group-focus-within:outline group-focus-within:outline-2 group-focus-within:outline-black">
+              Select file
+            </div>
+          </label>
+        </div>
+        <div className="flex flex-col gap-2">
+          <p>Or select one of the examples</p>
+          <button
+            className="button max-w-[200px]"
+            onClick={() => loadServerFile("medical-questionnaire")}
+          >
+            Medical questionnaire
+          </button>
+          <button
+            className="button max-w-[200px]"
+            onClick={() => loadServerFile("conditional-navigation")}
+          >
+            Conditional navigation
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
