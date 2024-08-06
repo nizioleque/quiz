@@ -4,7 +4,7 @@
       "id": 0,
       "type": "single-choice",
       "title": "Question ID 0",
-      "question": "Do you want to see question with ID 1?",
+      "question": "Do you want to see the question with ID 1?",
       "options": ["Yes", "No"],
       "conditions": [
         {
@@ -27,7 +27,7 @@
       "id": 2,
       "type": "single-choice",
       "title": "Question ID 2",
-      "question": "Do you want to see question with ID 3?",
+      "question": "Do you want to see the question with ID 3?",
       "options": ["Yes", "No"],
       "conditions": [
         {
@@ -49,7 +49,7 @@
       "id": 4,
       "type": "multiple-choice",
       "title": "Question ID 4",
-      "question": "Do you want to see question with ID 5?",
+      "question": "Do you want to see the question with ID 5?",
       "options": ["Yes"],
       "conditions": [
         {
@@ -72,7 +72,7 @@
       "id": 6,
       "type": "input",
       "title": "Question ID 6",
-      "question": "Type \"show\" to see question with ID 7",
+      "question": "Type \"show\" to see the question with ID 7",
       "options": ["Yes"],
       "conditions": [
         {

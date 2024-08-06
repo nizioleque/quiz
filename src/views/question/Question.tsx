@@ -24,7 +24,7 @@ function Question({ question }: QuestionProps) {
         )}
 
         {question.description && (
-          <p className="text-stone-700">{question.description}</p>
+          <p className="text-stone-700 text-justify">{question.description}</p>
         )}
 
         <fieldset className="mt-4 first:mt-0">

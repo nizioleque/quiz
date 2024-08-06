@@ -1,0 +1,97 @@
+{
+  "questions": [
+    {
+      "id": 0,
+      "image": "/img/medical-background.jpg",
+      "type": "input",
+      "title": "Welcome!",
+      "description": "In this questionnaire, you will be asked a series of questions about your health. Please answer them to the best of your ability. Your answers will be used by your doctor to select the best treatment for you.",
+      "question": "What is your name?"
+    },
+    {
+      "id": 1,
+      "image": "/img/medical-background.jpg",
+      "type": "single-choice",
+      "title": "Basic information",
+      "question": "What is age group?",
+      "options": ["20-39", "40-59", "60+"],
+      "conditions": [
+        {
+          "answerIndex": 0,
+          "condition": "selected",
+          "affectedQuestionId": 3,
+          "action": "show"
+        },
+        {
+          "answerIndex": 1,
+          "condition": "selected",
+          "affectedQuestionId": 4,
+          "action": "show"
+        },
+        {
+          "answerIndex": 2,
+          "condition": "selected",
+          "affectedQuestionId": 5,
+          "action": "show"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "image": "/img/medical-background.jpg",
+      "type": "input",
+      "title": "Basic information",
+      "question": "What is your weight?"
+    },
+    {
+      "id": 3,
+      "defaultHidden": true,
+      "image": "/img/medical-background.jpg",
+      "type": "single-choice",
+      "title": "Advanced information",
+      "description": "Based on your age group, there is a higher probability of sleep-related issues.",
+      "question": "How many hours per day do you sleep?",
+      "options": ["Less than 6", "6-8", "More than 8"]
+    },
+    {
+      "id": 4,
+      "defaultHidden": true,
+      "image": "/img/medical-background.jpg",
+      "type": "multiple-choice",
+      "title": "Advanced information",
+      "description": "Based on your age group, there is a higher probability of diet-related issues.",
+      "question": "Which of the following products do you consume at least once per week?",
+      "options": [
+        "Chocolate",
+        "Beef",
+        "Alcoholic drinks",
+        "White bread",
+        "Potato chips"
+      ]
+    },
+    {
+      "id": 5,
+      "defaultHidden": true,
+      "image": "/img/medical-background.jpg",
+      "type": "single-choice",
+      "title": "Advanced information",
+      "description": "Based on your age group, there is a higher need of regular physical activity.",
+      "question": "How would you describe your level of physical activity?",
+      "options": [
+        "I only get up from bed to eat",
+        "I walk around the house",
+        "I go on a walk every day",
+        "I exercise regularly"
+      ]
+    },
+    {
+      "id": 6,
+      "image": "/img/medical-background.jpg",
+      "type": "input",
+      "variant": "multi-line",
+      "title": "Thank you!",
+      "description": "Thank you for completing the questionnaire. Your answers will be used by your doctor to select the best treatment for you. If there is anything else you would like to add, please do so here.",
+      "question": "Additional comments"
+    }
+  ]
+}
