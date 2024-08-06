@@ -9,6 +9,8 @@ interface QuestionBase {
   imageAlt?: string;
   title?: string;
   description?: string;
+
+  /** If `true`, the question will not be visible unless it is shown by a condition */
   defaultHidden?: boolean;
 
   question: string;
@@ -41,7 +43,9 @@ export type Question =
 export type Answer = number | number[] | string;
 
 export interface QuestionCondition {
+  /** The ID of the question that should be shown or hidden */
   affectedQuestionId: QuestionId;
+  /** Whether the question should be shown or hidden */
   action: "show" | "hide";
 }
 

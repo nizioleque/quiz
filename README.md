@@ -12,6 +12,7 @@ This is called a quiz app, but it's actually a questionnaire app.
 
 ## Extra features
 
+- Clear JSON structure (see `/src/types.ts`)
 - Animation between questions
 - Progress bar
 - Conditional navigation
