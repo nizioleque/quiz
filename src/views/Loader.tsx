@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction } from "react";
-import { Question } from "../types";
+import { Question, QuestionId } from "../types";
 
 interface LoaderProps {
   setQuestions: Dispatch<SetStateAction<Question[] | null>>;
+  setIsQuestionShown: Dispatch<SetStateAction<Record<QuestionId, boolean>>>;
 }
 
-function Loader({ setQuestions }: LoaderProps) {
+function Loader({ setQuestions, setIsQuestionShown }: LoaderProps) {
   const loadFile = async (file: File | undefined) => {
     if (!file) return;
 
@@ -14,16 +15,13 @@ function Loader({ setQuestions }: LoaderProps) {
       const json = JSON.parse(text);
       if (!("questions" in json)) throw new Error("Invalid JSON");
 
-      // TODO remove/replace?
-      for (const questionIndex in json.questions) {
-        const question = json.questions[questionIndex];
-        const nextQuestionIndex = parseInt(questionIndex) + 1;
-        if (nextQuestionIndex < json.questions.length) {
-          question.nextQuestionId = json.questions[nextQuestionIndex].id;
-        }
+      const isShown: Record<QuestionId, boolean> = {};
+      for (const question of json.questions) {
+        isShown[question.id] = !question.defaultHidden;
       }
 
       setQuestions(json.questions);
+      setIsQuestionShown(isShown);
     } catch {
       // TODO handle error
     }

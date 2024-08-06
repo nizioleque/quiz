@@ -1,20 +1,28 @@
 import { useState } from "react";
-import { Question as QuestionType } from "./types";
+import useQuestions from "./useQuestions";
 import Loader from "./views/Loader";
 import Questions from "./views/question/Questions";
 import ThankYou from "./views/ThankYou";
 
 function AppContent() {
-  const [questions, setQuestions] = useState<QuestionType[] | null>(null);
+  const questionsState = useQuestions();
+  const { questions, setQuestions, setIsQuestionShown } = questionsState;
+
   const [areQuestionsDone, setAreQuestionsDone] = useState<boolean>(false);
 
   // TODO handle empty questions file
 
-  if (questions === null) return <Loader setQuestions={setQuestions} />;
+  if (questions === null)
+    return (
+      <Loader
+        setQuestions={setQuestions}
+        setIsQuestionShown={setIsQuestionShown}
+      />
+    );
   if (areQuestionsDone) return <ThankYou />;
   return (
     <Questions
-      questions={questions}
+      questionsState={questionsState}
       setAreQuestionsDone={setAreQuestionsDone}
     />
   );

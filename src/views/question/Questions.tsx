@@ -1,32 +1,53 @@
-import { Dispatch, SetStateAction, useMemo, useState } from "react";
-import { Answer, QuestionId, Question as QuestionType } from "../../types";
+import { Dispatch, SetStateAction, useCallback, useMemo } from "react";
+import { Answer } from "../../types";
+import useQuestions from "../../useQuestions";
 import AnswerContext from "./AnswerContext";
 import QuestionLayout from "./layout/QuestionLayout";
 import Question from "./Question";
 import useQuestionNavigation from "./useQuestionNavigation";
 
 interface QuestionsProps {
-  questions: QuestionType[];
+  questionsState: ReturnType<typeof useQuestions>;
   setAreQuestionsDone: Dispatch<SetStateAction<boolean>>;
 }
 
-function Questions({ questions, setAreQuestionsDone }: QuestionsProps) {
-  const navigationState = useQuestionNavigation(questions, setAreQuestionsDone);
+function Questions({ questionsState, setAreQuestionsDone }: QuestionsProps) {
+  const {
+    questions,
+    answers,
+    updateAnswer: updateContextAnswer,
+  } = questionsState;
+
+  const navigationState = useQuestionNavigation(
+    questionsState,
+    setAreQuestionsDone
+  );
   const { currentId } = navigationState;
 
-  const [answers, setAnswers] = useState<Record<QuestionId, Answer>>({});
-
-  const currentQuestion = useMemo(
-    () => questions.find((question) => question.id === currentId),
+  const question = useMemo(
+    () => questions?.find((question) => question.id === currentId),
     [currentId, questions]
   );
 
-  if (currentId === null || currentQuestion === undefined) return null;
+  const answer = useMemo(
+    () => (currentId !== null ? answers[currentId] : undefined),
+    [answers, currentId]
+  );
+
+  const updateAnswer = useCallback(
+    (update: SetStateAction<Answer>) => {
+      if (currentId === null) return;
+      updateContextAnswer(currentId, update);
+    },
+    [currentId, updateContextAnswer]
+  );
+
+  if (currentId === null || question === undefined) return null;
 
   return (
     <QuestionLayout navigationState={navigationState}>
-      <AnswerContext.Provider value={{ answers, setAnswers }}>
-        <Question question={currentQuestion} />
+      <AnswerContext.Provider value={{ answer, updateAnswer }}>
+        <Question question={question} />
       </AnswerContext.Provider>
     </QuestionLayout>
   );

@@ -1,0 +1,95 @@
+{
+  "questions": [
+    {
+      "id": 0,
+      "type": "single-choice",
+      "title": "Question ID 0",
+      "question": "Do you want to see question with ID 1?",
+      "options": ["Yes", "No"],
+      "conditions": [
+        {
+          "answerIndex": 0,
+          "condition": "selected",
+          "affectedQuestionId": 1,
+          "action": "show"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "defaultHidden": true,
+      "type": "single-choice",
+      "title": "Question ID 1",
+      "question": "You see this question because you selected \"Yes\"?",
+      "options": ["Ok"]
+    },
+    {
+      "id": 2,
+      "type": "single-choice",
+      "title": "Question ID 2",
+      "question": "Do you want to see question with ID 3?",
+      "options": ["Yes", "No"],
+      "conditions": [
+        {
+          "answerIndex": 0,
+          "condition": "not-selected",
+          "affectedQuestionId": 3,
+          "action": "hide"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "single-choice",
+      "title": "Question ID 3",
+      "question": "You see this question because you selected \"Yes\"?",
+      "options": ["Ok"]
+    },
+    {
+      "id": 4,
+      "type": "multiple-choice",
+      "title": "Question ID 4",
+      "question": "Do you want to see question with ID 5?",
+      "options": ["Yes"],
+      "conditions": [
+        {
+          "answerIndex": 0,
+          "condition": "selected",
+          "affectedQuestionId": 5,
+          "action": "show"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "defaultHidden": true,
+      "type": "multiple-choice",
+      "title": "Question ID 5",
+      "question": "You see this question because you selected \"Yes\"?",
+      "options": ["Ok"]
+    },
+    {
+      "id": 6,
+      "type": "input",
+      "title": "Question ID 6",
+      "question": "Type \"show\" to see question with ID 7",
+      "options": ["Yes"],
+      "conditions": [
+        {
+          "answerValue": "show",
+          "condition": "equal",
+          "affectedQuestionId": 7,
+          "action": "show"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "defaultHidden": true,
+      "type": "multiple-choice",
+      "title": "Question ID 7",
+      "question": "You see this question because you typed \"show\"",
+      "options": ["Ok"]
+    }
+  ]
+}
