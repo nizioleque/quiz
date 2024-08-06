@@ -13,7 +13,7 @@
       "image": "/img/medical-background.jpg",
       "type": "single-choice",
       "title": "Basic information",
-      "question": "What is age group?",
+      "question": "What is your age group?",
       "options": ["20-39", "40-59", "60+"],
       "conditions": [
         {
