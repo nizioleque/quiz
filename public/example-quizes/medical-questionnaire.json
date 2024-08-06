@@ -88,6 +88,7 @@
       "id": 6,
       "image": "/img/medical-background.jpg",
       "type": "input",
+      "optional": true,
       "variant": "multi-line",
       "title": "Thank you!",
       "description": "Thank you for completing the questionnaire. Your answers will be used by your doctor to select the best treatment for you. If there is anything else you would like to add, please do so here.",

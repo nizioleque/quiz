@@ -28,7 +28,8 @@ export interface MultipleChoiceQuestion extends QuestionBase {
 
 export interface InputQuestion extends QuestionBase {
   type: "input";
-  variant: "single-line" | "multi-line";
+  variant?: "single-line" | "multi-line";
+  optional?: boolean;
   conditions?: InputQuestionCondition[];
 }
 

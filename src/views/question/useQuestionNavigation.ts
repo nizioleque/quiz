@@ -67,7 +67,9 @@ function useQuestionNavigation(
   const disableBackButton = navigateBack === undefined;
   const disableNextButton =
     (question?.type === "single-choice" && answer === undefined) ||
-    (question?.type === "input" && (answer === undefined || answer === ""));
+    (question?.type === "input" &&
+      !question?.optional &&
+      (answer === undefined || answer === ""));
 
   return {
     currentId,
