@@ -14,7 +14,7 @@ function QuestionAnswers({ question }: QuestionAnswersProps) {
     case "multiple-choice":
       return <MultipleChoiceAnswers question={question} />;
     case "input":
-      return <InputAnswers />;
+      return <InputAnswers question={question} />;
   }
 }
 

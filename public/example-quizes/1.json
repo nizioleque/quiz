@@ -1,6 +1,19 @@
 {
   "questions": [
     {
+      "id": 5,
+      "type": "input",
+      "title": "Single line",
+      "question": "What is the capital of the United Kingdom?"
+    },
+    {
+      "id": 6,
+      "type": "input",
+      "title": "Multi line",
+      "variant": "multi-line",
+      "question": "What is the capital of the United Kingdom?"
+    },
+    {
       "id": 3,
       "type": "single-choice",
       "title": "Europe's capitals",
@@ -35,11 +48,6 @@
       "type": "multiple-choice",
       "question": "Which of these cities are located in the United States of America?",
       "options": ["New York", "London", "Los Angeles", "Dublin"]
-    },
-    {
-      "id": 5,
-      "type": "input",
-      "question": "What is the capital of the United Kingdom?"
     }
   ]
 }
