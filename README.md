@@ -1,18 +1,26 @@
-TODO:
+# Quiz app
 
-- ✅ recording answers
-- ✅ conditional navigation (hide/show questions)
-- ✅ showing remaining questions
-- ✅ prepare examples
-- ✅ prevent `next` without answer
-- ✅ design text input
-- ✅ remove answers when a question is removed
-- ✅ display answers
+[**Live demo**](https://quiz.niziolek.dev/)
 
-- ✅ add example selector
-- ❌ show thank you after animation
-- ✅ add padding
-- write readme
+This is called a quiz app, but it's actually a questionnaire app.
 
-- ➖ aria role for nav?
-- ➖ highlight next button
+## Running locally
+
+1. Install dependencies: `yarn`
+2. Run the dev server: `yarn dev`
+3. Visit http://localhost:5173/
+
+## Extra features
+
+- Animation between questions
+- Progress bar
+- Conditional navigation
+- Support for optional and single/multi-line input questions
+- Responsive design
+- Attention to accessibility
+
+## Potential improvements
+
+While I tried to achieve high code quality, it's not perfect because of the time limitations.
+
+There are a couple of TODOs left in the code for edge case handling (errors, validation, etc.)
