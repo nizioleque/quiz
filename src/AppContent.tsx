@@ -6,7 +6,8 @@ import ThankYou from "./views/ThankYou";
 
 function AppContent() {
   const questionsState = useQuestions();
-  const { questions, setQuestions, setIsQuestionShown } = questionsState;
+  const { questions, answers, setQuestions, setIsQuestionShown } =
+    questionsState;
 
   const [areQuestionsDone, setAreQuestionsDone] = useState<boolean>(false);
 
@@ -19,7 +20,7 @@ function AppContent() {
         setIsQuestionShown={setIsQuestionShown}
       />
     );
-  if (areQuestionsDone) return <ThankYou />;
+  if (areQuestionsDone) return <ThankYou answers={answers} />;
   return (
     <Questions
       questionsState={questionsState}
