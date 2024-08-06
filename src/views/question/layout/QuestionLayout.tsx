@@ -9,10 +9,16 @@ import useQuestionAnimation from "./useQuestionAnimation";
 interface QuestionLayoutProps {
   children: ReactNode;
   navigationState: ReturnType<typeof useQuestionNavigation>;
+  maxQuestions: number;
 }
 
-function QuestionLayout({ children, navigationState }: QuestionLayoutProps) {
-  const { currentId, navigateBack, navigateNext } = navigationState;
+function QuestionLayout({
+  children,
+  navigationState,
+  maxQuestions,
+}: QuestionLayoutProps) {
+  const { currentId, navigateBack, navigateNext, currentIndex } =
+    navigationState;
 
   const {
     exitingChildren,
@@ -21,8 +27,12 @@ function QuestionLayout({ children, navigationState }: QuestionLayoutProps) {
     setAnimationDirection,
   } = useQuestionAnimation(children, currentId);
 
-  const { heightOffset, exitingChildrenContainerRef, childrenContainerRef } =
-    useProgressBarAnimation(exitingChildren);
+  const {
+    heightOffset,
+    handleAnimationEnd: handleProgressBarAnimationEnd,
+    exitingChildrenContainerRef,
+    childrenContainerRef,
+  } = useProgressBarAnimation(exitingChildren);
 
   const handleBack = navigateBack
     ? () => {
@@ -47,12 +57,10 @@ function QuestionLayout({ children, navigationState }: QuestionLayoutProps) {
       }}
     >
       <ProgressBar
-        // TODO rerun animation instead of re-rendering
-        key={`progress-${currentId}`}
         heightOffset={heightOffset}
-        // TODO calculate and pass correct values
-        answeredQuestions={3}
-        maxQuestions={7}
+        onAnimationEnd={handleProgressBarAnimationEnd}
+        answeredQuestions={currentIndex}
+        maxQuestions={maxQuestions}
       />
       <div key={currentId} className="flex items-center relative">
         <QuestionAnimation

@@ -1,7 +1,7 @@
 import { ReactNode, useLayoutEffect, useRef, useState } from "react";
 
 function useProgressBarAnimation(exitingChildren: ReactNode | null) {
-  const [heightOffset, setHeightOffset] = useState<number>(0);
+  const [heightOffset, setHeightOffset] = useState<number | null>(null);
   const exitingChildrenContainerRef = useRef<HTMLDivElement>(null);
   const childrenContainerRef = useRef<HTMLDivElement>(null);
 
@@ -21,8 +21,13 @@ function useProgressBarAnimation(exitingChildren: ReactNode | null) {
     setHeightOffset(heightOffset);
   }, [exitingChildren]);
 
+  const handleAnimationEnd = () => {
+    setHeightOffset(null);
+  };
+
   return {
     heightOffset,
+    handleAnimationEnd,
     exitingChildrenContainerRef,
     childrenContainerRef,
   };

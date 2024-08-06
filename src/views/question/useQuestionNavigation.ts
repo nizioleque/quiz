@@ -15,6 +15,11 @@ function useQuestionNavigation(
 
   const [currentId, setCurrentId] = useState<QuestionId | null>(null);
 
+  const currentIndex = useMemo(
+    () => questions?.findIndex((question) => question.id === currentId) ?? 0,
+    [currentId, questions]
+  );
+
   const previousId = useMemo(() => {
     const index = filteredQuestions.findIndex(
       (question) => question.id === currentId
@@ -51,6 +56,7 @@ function useQuestionNavigation(
 
   return {
     currentId,
+    currentIndex,
     navigateBack,
     navigateNext,
   };

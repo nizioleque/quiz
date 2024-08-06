@@ -58,6 +58,9 @@ export default {
         slideOutRight: `slideOutRight ${SlideDuration} ${EaseOutCubic} forwards`,
         slideToHeight: `slideToHeight 400ms ${EaseOutCubic}`,
       },
+      transitionProperty: {
+        width: "width",
+      },
     },
   },
   plugins: [],
