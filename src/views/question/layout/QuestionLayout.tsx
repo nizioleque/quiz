@@ -1,8 +1,8 @@
-import clsx from "clsx";
 import { ReactNode } from "react";
 import { QuestionId } from "../../../types";
-import NavButton from "./NavButton";
 import ProgressBar from "./ProgressBar";
+import QuestionAnimation from "./QuestionAnimation";
+import useNavButtons from "./useNavButtons";
 import useProgressBarAnimation from "./useProgressBarAnimation";
 import useQuestionAnimation from "./useQuestionAnimation";
 
@@ -21,7 +21,7 @@ function QuestionLayout({
 }: QuestionLayoutProps) {
   const {
     exitingChildren,
-    setExitingChildren,
+    handleAnimationEnd,
     animationDirection,
     setAnimationDirection,
   } = useQuestionAnimation(children);
@@ -29,23 +29,9 @@ function QuestionLayout({
   const { heightOffset, exitingChildrenContainerRef, childrenContainerRef } =
     useProgressBarAnimation(exitingChildren);
 
-  const backButton = onBack ? (
-    <NavButton
-      direction="back"
-      onClick={() => {
-        setAnimationDirection("right");
-        onBack();
-      }}
-    />
-  ) : null;
-
-  const nextButton = (
-    <NavButton
-      direction="next"
-      onClick={() => {
-        setAnimationDirection("left");
-      }}
-    />
+  const { desktopButtons, mobileButtons } = useNavButtons(
+    setAnimationDirection,
+    onBack
   );
 
   return (
@@ -65,48 +51,23 @@ function QuestionLayout({
         maxQuestions={7}
       />
       <div key={currentId} className="flex items-center relative">
-        <div
-          ref={exitingChildrenContainerRef}
-          className={clsx(
-            "absolute w-full",
-            animationDirection === "left"
-              ? "animate-slideOutLeft"
-              : "animate-slideOutRight"
-          )}
-          onAnimationEnd={() => setExitingChildren(null)}
-          aria-hidden
-        >
-          {exitingChildren}
-        </div>
-        <div
-          ref={childrenContainerRef}
-          className={clsx(
-            "flex-1",
-            animationDirection === "left"
-              ? "animate-slideInLeft"
-              : "animate-slideInRight"
-          )}
+        <QuestionAnimation
+          exitingChildren={exitingChildren}
+          onAnimationEnd={handleAnimationEnd}
+          animationDirection={animationDirection}
+          exitingChildrenContainerRef={exitingChildrenContainerRef}
+          childrenContainerRef={childrenContainerRef}
         >
           {children}
-        </div>
+        </QuestionAnimation>
 
-        {/* back/forward buttons for desktop */}
-        <div className="order-first overflow-visible hidden lg:flex w-0 justify-end">
-          {backButton}
-        </div>
-        <div className="order-last overflow-visible hidden lg:block w-0">
-          {nextButton}
-        </div>
+        {desktopButtons}
       </div>
 
       {/* empty div to ensure even spacing */}
       <div className="flex-1 invisible hidden lg:block" />
 
-      {/* back/forward buttons for mobile */}
-      <div className="flex-1 flex justify-between self-stretch lg:hidden -mx-2">
-        <div>{backButton}</div>
-        <div className="ms-auto">{nextButton}</div>
-      </div>
+      {mobileButtons}
     </form>
   );
 }

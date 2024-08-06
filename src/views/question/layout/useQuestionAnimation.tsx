@@ -16,9 +16,13 @@ function useQuestionAnimation(children: ReactNode) {
     setLastChildren(children);
   }, [children, lastChildren]);
 
+  const handleAnimationEnd = () => {
+    setExitingChildren(null);
+  };
+
   return {
     exitingChildren,
-    setExitingChildren,
+    handleAnimationEnd,
     animationDirection,
     setAnimationDirection,
   };
