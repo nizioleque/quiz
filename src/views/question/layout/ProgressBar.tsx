@@ -34,7 +34,11 @@ function ProgressBar({
             />
           </div>
           <div className="text-end text-stone-700 text-sm">
-            Up to {remainingQuestions} questions left
+            {remainingQuestions > 1 ? (
+              <>Up to {remainingQuestions} questions left</>
+            ) : (
+              "Last question"
+            )}
           </div>
         </nav>
       </div>
