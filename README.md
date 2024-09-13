@@ -1,8 +1,8 @@
-# Quiz app
+# [**Quiz app**](https://quiz.niziolek.dev/)
 
-This is actually a questionnaire app.
+>This is actually a questionnaire app.
 
-[**Live demo**](https://quiz.niziolek.dev/)
+Beautiful, intuitive and smooth questionnaire app. Build yours with the simple but powerful JSON definition and enjoy filling in the form.
 
 [Preview](https://github.com/user-attachments/assets/a2d11a9c-be41-47ef-95ed-cf533e998024)
 
